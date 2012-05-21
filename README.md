@@ -12,6 +12,7 @@ A really simple browser based app for viewing Tilemill tiles in a browser with b
 ## Notes
 
   * Rendering tiles through this interface will take just as long as through Tilemill.
+  * As Tilemill does not output tilejson, there's no good way to get the interactive parts, like tooltips, legends, etc.
 
 ## Technologies Used
 
