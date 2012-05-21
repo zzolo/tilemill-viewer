@@ -15,6 +15,12 @@ A really simple browser based app for viewing Tilemill tiles in a browser with b
   * Rendering tiles through this interface will take just as long as through Tilemill.
   * As Tilemill does not output tilejson, there's no good way to get the interactive parts, like tooltips, legends, etc.
   * Pulling in base maps from Mapbox Street, OSM, and MapQuest.
+  
+## Todo
+
+Since the JSONP is not available, there should be a server side component (or a manual script)
+that will scrape the data from Tilemill.  This would also allow for a easy way to import
+all the maps into the viewer and not have a need to manually add the IDs.
 
 ## Technologies Used
 
