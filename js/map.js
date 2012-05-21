@@ -38,6 +38,7 @@ $(document).ready(function() {
 	function loadMap(project) {
     var base = (typeof project != 'undefined') ? project : $('input.update-map').val();
     var url = baseUrl + '/' + base + '/{z}/{x}/{y}.png';
+    var urlGrid = baseUrl + '/' + base + '/{z}/{x}/{y}.grid.json';
     
     // Add new layer
     layer = new L.TileLayer(url, { maxZoom: 15, minZoom: 2, scheme: 'xyz' });
