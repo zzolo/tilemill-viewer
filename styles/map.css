@@ -1,0 +1,29 @@
+/**
+ * Main CSS for map
+ */
+
+#map {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+}
+
+.map-form {
+  position: absolute;
+  z-index: 999999;
+  bottom: 10px;
+  right: 10px;
+  width: 300px;
+  margin: 0;
+  padding: 0;
+}
+
+.update-map {
+  width: 90%;
+  font-size: 1.5em;
+  padding: .25em;
+  border: 1px solid #999999;
+  margin: 0;
+}

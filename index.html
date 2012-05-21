@@ -7,35 +7,9 @@
 
 	<link rel="stylesheet" href="libraries/leaflet/dist/leaflet.css" />
 	<!--[if lte IE 8]><link rel="stylesheet" href="libraries/leaflet/dist/leaflet.ie.css" /><![endif]-->
+	<link rel="stylesheet" href="styles/map.css" />
 </head>
 <body>
-  <style type="text/css">
-    #map {
-      position: absolute;
-      top: 0;
-      bottom: 0;
-      right: 0;
-      left: 0;
-    }
-    
-    .map-form {
-      position: absolute;
-      z-index: 999999;
-      top: 10px;
-      right: 10px;
-      width: 300px;
-      margin: 0;
-      padding: 0;
-    }
-    
-    .update-map {
-      width: 90%;
-      font-size: 1.5em;
-      padding: .25em;
-      border: 1px solid #999999;
-      margin: 0;
-    }
-  </style>
 
   <div class="map-form">
     <form>
@@ -45,8 +19,9 @@
   
 	<div id="map"></div>
 	
-	<script src="libraries/leaflet/dist/leaflet.js"></script>
 	<script src="http://code.jquery.com/jquery.min.js"></script>
+	<script src="libraries/leaflet/dist/leaflet.js"></script>
+	<script src="libraries/wax/dist/wax.leaf.min.js"></script>
 	<script src="js/map.js"></script>
 </body>
 </html>
