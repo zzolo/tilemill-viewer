@@ -9,10 +9,14 @@ A really simple browser based app for viewing Tilemill tiles in a browser with b
 1. Run Tilemill
 1. Open ```index.html``` in a browser.
 
+## Notes
+
+  * Rendering tiles through this interface will take just as long as through Tilemill.
+
 ## Technologies Used
 
 Note that this viewer attempts to use the master/development version of
 some libraries, so it is not stable necesarily.
 
-* Leaflet
-* Wax
+  * Leaflet
+  * Wax

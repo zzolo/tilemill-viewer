@@ -8,13 +8,11 @@ $(document).ready(function() {
   var baselayers = {};
   var overlays = {};
   var layerControl = {};
-
-  // Set default and load default layer
-  $('input.update-map').val('geography-class');
+  var projectAddLabel = 'Enter Project ID';
   
   // OSM base layer
   var osm = new L.TileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    minZoom: 0, maxZoom: 22, attribution: 'Map data © OpenStreetMap contributors'
+    minZoom: 0, maxZoom: 22, attribution: 'Map data &copy; OpenStreetMap contributors'
   });
   baselayers['Default OSM'] = osm;
 	map.addLayer(osm);
@@ -32,40 +30,62 @@ $(document).ready(function() {
   baselayers['Mapquest'] = mapquest;
 	map.addLayer(osm);
 
-	
 	// Add control
   layerControl = new L.Control.Layers(baselayers, overlays);
   map.addControl(layerControl);
 	
 	// Function load map
 	function loadMap(project) {
-    var base = $('input.update-map').val();
+    var base = (typeof project != 'undefined') ? project : $('input.update-map').val();
     var url = baseUrl + '/' + base + '/{z}/{x}/{y}.png';
     
     // Add new layer
     layer = new L.TileLayer(url, { maxZoom: 15, minZoom: 2, scheme: 'xyz' });
     map.setView(new L.LatLng(0, 0), 3).addLayer(layer);
     
-    // Add layer to overlays and re-add control
-    layerControl.addOverlay(layer, base);
+    // Add layer to overlays if not already
+    if (typeof overlays[base] == 'undefined') {
+      overlays[base] = layer;
+      layerControl.addOverlay(layer, base);
+    }
     
     // TileMill does not produce a tilejson feed or jsonp version. :(
-    // Use tilejson to load it up
-    /*
-    wax.tilejson(base_url + '/' + base + '.jsonp',
-      function(tilejson) {
-      console.log(tilejson);
-      }
-    );
-    */
 	};
 	
   // Load the default map
-  loadMap();
+  loadMap('geography-class');
 
   // Allow for input of other maps
   $('.map-form form').on('submit', function(e) {
     e.preventDefault();
-    loadMap();
+    
+    // Handle label and load project if needed.
+    $('input.update-map').trigger('focusout');
+    var current = $('input.update-map').val();
+    if (current != projectAddLabel || current != '') {
+      loadMap();
+    }
   });
+  
+  // Create a helpful label for adding projects
+  $('input.update-map').focusout(function(e) {
+    if ($(this).val() == '') {
+      $(this).val(projectAddLabel);
+    }
+    if ($(this).val() == projectAddLabel) {
+      $(this).addClass('labelling');
+    }
+    else {
+      $(this).removeClass('labelling');
+    }
+  });
+  $('input.update-map').focusin(function(e) {
+    if ($(this).val() == projectAddLabel) {
+      $(this).val('');
+    }
+    $(this).removeClass('labelling');
+  });
+  
+  // Start off label
+  $('input.update-map').trigger('focusout');
 });
