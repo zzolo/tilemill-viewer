@@ -1,0 +1,6 @@
+[submodule "libraries/leaflet"]
+	path = libraries/leaflet
+	url = https://github.com/CloudMade/Leaflet.git
+[submodule "libraries/wax"]
+	path = libraries/wax
+	url = https://github.com/mapbox/wax.git
