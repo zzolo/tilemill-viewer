@@ -5,6 +5,7 @@ $(document).ready(function() {
   var map = new L.Map('map');
   var layer;
   var baseUrl = 'http://localhost:20008/tile';
+  var baseAPI = 'http://localhost:20009/api/';
   var baselayers = {};
   var overlays = {};
   var layerControl = {};
@@ -36,18 +37,20 @@ $(document).ready(function() {
     var base = (typeof project != 'undefined') ? project : $('input.update-map').val();
     var url = baseUrl + '/' + base + '/{z}/{x}/{y}.png';
     var urlGrid = baseUrl + '/' + base + '/{z}/{x}/{y}.grid.json';
+    var tilemillJSONP = baseAPI + 'Project/' + base + '/';
     
-    // Add new layer
-    layer = new L.TileLayer(url, { maxZoom: 15, minZoom: 2, scheme: 'xyz' });
-    map.setView(new L.LatLng(0, 0), 3).addLayer(layer);
+    // TileMill produces a tilejson with its API
+    wax.tilejson(tilemillJSONP, function(tilejson) {
+      console.log(tilejson);
+      var layer = map.addLayer(new wax.leaf.connector(tilejson));
+      map.setView(new L.LatLng(tilejson.center[0], tilejson.center[1]), tilejson.center[2]);
     
-    // Add layer to overlays if not already
-    if (typeof overlays[base] == 'undefined') {
-      overlays[base] = layer;
-      layerControl.addOverlay(layer, base);
-    }
-    
-    // TileMill does not produce a tilejson feed or jsonp version. :(
+      // Add layer to overlays if not already
+      if (typeof overlays[base] == 'undefined') {
+        overlays[base] = layer;
+        layerControl.addOverlay(layer, base);
+      }
+    });
 	};
 	
   // Load the default map
